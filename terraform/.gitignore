@@ -1,0 +1,24 @@
+# Terraform working files and state
+.terraform/
+*.tfstate
+*.tfstate.*
+tfplan
+*.tfplan
+
+# Local settings and private keys
+*.tfvars
+*.tfvars.json
+backend.hcl
+*.pem
+.terraformrc
+terraform.rc
+
+# Local overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Crash logs
+crash.log
+crash.*.log

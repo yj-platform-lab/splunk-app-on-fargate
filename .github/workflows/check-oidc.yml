@@ -15,11 +15,10 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            // ① GitHubへ要求 → ② OIDCトークンを受け取る
+            // AWS STS向けのトークン発行依頼
             const token = await core.getIDToken('sts.amazonaws.com');
             core.setSecret(token);
 
-            // トークン本体は表示せず、中の情報だけ確認する
             const claims = JSON.parse(
               Buffer.from(token.split('.')[1], 'base64url').toString('utf8')
             );

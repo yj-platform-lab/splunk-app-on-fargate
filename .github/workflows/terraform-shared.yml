@@ -67,22 +67,22 @@ jobs:
 
       - name: Terraform init
         run: |
-          terraform init -no-color \
+          terraform init \
             -backend-config="bucket=$TF_BACKEND_BUCKET" \
             -backend-config="key=$TF_BACKEND_KEY" \
             -backend-config="region=$TF_VAR_aws_region"
 
       - name: Terraform validate
-        run: terraform validate -no-color
+        run: terraform validate
 
       - name: Terraform plan
         if: inputs.action != 'destroy'
-        run: terraform plan -no-color -lock-timeout=5m -out=tfplan
+        run: terraform plan -lock-timeout=5m -out=tfplan
 
       - name: Terraform destroy plan
         if: inputs.action == 'destroy'
-        run: terraform plan -destroy -no-color -lock-timeout=5m -out=tfplan
+        run: terraform plan -destroy -lock-timeout=5m -out=tfplan
 
       - name: Terraform apply
         if: inputs.action == 'apply' || inputs.action == 'destroy'
-        run: terraform apply -no-color -lock-timeout=5m tfplan
+        run: terraform apply -lock-timeout=5m tfplan
